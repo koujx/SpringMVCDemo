@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<toolbox>
+	<data type="string">
+		<key>version</key>
+		<value>2.0</value>
+	</data>
+	<!-- fe related -->
+	<tool>
+		<key>fe</key>
+		<scope>application</scope>
+		<class>com.lianjia.merlin.web.constants.FeConstants</class>
+	</tool>
+	<!-- fe related end -->
+	<tool>
+		<key>math</key>
+		<scope>application</scope>
+		<class>org.apache.velocity.tools.generic.MathTool</class>
+	</tool>
+	<tool>
+		<key>esc</key>
+		<scope>application</scope>
+		<class>org.apache.velocity.tools.generic.EscapeTool</class>
+	</tool>
+	<tool>
+		<key>date</key>
+		<scope>application</scope>
+		<class>org.apache.velocity.tools.generic.DateTool</class>
+		<parameter name="format" value="yyyy-MM-dd" />
+	</tool>
+	
+	<tool>
+		<key>dateyyyyMMddHHmm</key>
+		<scope>application</scope>
+		<class>org.apache.velocity.tools.generic.DateTool</class>
+		<parameter name="format" value="yyyy-MM-dd HH:mm" />
+	</tool>
+	
+	<tool>
+		<key>str</key>
+		<scope>application</scope>
+		<class>org.apache.commons.lang.StringUtils</class>
+	</tool>
+
+
+
+	<!-- 
+	<tool>
+		<key>const</key>
+		<scope>application</scope>
+		<class>com.netease.product.common.velocity.ConstantsMap</class>
+	</tool>
+	 -->
+	 <!-- 
+	
+	
+	<tool>
+		<key>rightsUtil</key>
+		<scope>application</scope>
+		<class>com.netease.hotnews.common.sna.RightsUtil</class>
+	</tool>
+	<tool>
+		<key>str</key>
+		<scope>application</scope>
+		<class>com.netease.hotnews.common.util.StringUtil</class>
+	</tool>
+	<tool>
+		<key>json</key>
+		<scope>application</scope>
+		<class>com.netease.hotnews.common.util.JsonUtil</class>
+	</tool>
+	
+	<tool>
+		<key>pinyin</key>
+		<scope>application</scope>
+		<class>com.netease.mobile.common.util.Pinyin4jUtil</class>
+	</tool>
+	 -->
+	
+</toolbox>

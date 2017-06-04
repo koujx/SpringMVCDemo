@@ -8,6 +8,7 @@ import java.io.*;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Map;
 
 /**
  * Created by KouJiaxing on 2017-5-5.
@@ -79,11 +80,23 @@ public class httpRequest {
 
     @Test
     public void apiTest() {
-        String params = "app_key=12345678&params={\"dateType\": 1, \"dim\": \"corp_code\",  \"startDate\": 20170401, \"endDate\": 20170501, \"pageNo\": 1, \"pageSize\": 10, \"fitter\": [{\"dim\": \"corp_code\",\"value\": [\"A10001\",\"ZS8888\"]}]}&sign = 8b0a071669ea54b4a058684fb9d1f0f4&ts=2017-05-04 13:25:00\n";
+        String params = "app_key=12345678&params={\"dateType\": 1, \"dim\": \"corp_code\",  \"startDate\": 20170401, \"endDate\": 20170501, \"pageNo\": 1, \"pageSize\": 10, \"fitter\": [{\"dim\": \"corp_code\",\"value\": [\"A10001\",\"ZS8888\"]}]}&sign=8b0a071669ea54b4a058684fb9d1f0f4&ts = 2017-05-04 13:25:00";
+        System.out.println(params);
         String url = "http://10.23.241.138:8889/v2/target/showing";
         String method = "POST";
         JSONObject jsonObject = httpRequest(url, method, params);
-        System.out.println(jsonObject);
-        //System.out.println(JSONObject.parseObject(jsonObject.get("data").toString()).get("list"));
+        System.out.println(jsonObject.getJSONObject("data").getJSONObject("mapping"));
+        for (Map.Entry<String,Object> entry:jsonObject.getJSONObject("data").getJSONObject("mapping").entrySet()) {
+            System.out.println(entry.getKey() + "===" + entry.getValue());
+        }
+
+
+       /* String[] strings = new String[3];
+        strings[0] = "123";
+        strings[1] = "456";
+        strings[2] = "789";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("defaultIndex", strings);
+        System.out.println(jsonObject);*/
     }
 }

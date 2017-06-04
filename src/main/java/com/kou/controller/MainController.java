@@ -60,6 +60,7 @@ public class MainController {
         return "redirect:/admin/users";
     }
 
+
     //查看用户详情
     //@PathVariable（“xxx”）用于收集url中的变量xxx
     @RequestMapping(value = "/admin/users/show/{id}", method = RequestMethod.GET)
