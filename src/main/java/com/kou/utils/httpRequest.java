@@ -3,12 +3,16 @@ package com.kou.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
+import redis.clients.jedis.Jedis;
 
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.io.*;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
 
 /**
  * Created by KouJiaxing on 2017-5-5.
@@ -78,25 +82,69 @@ public class httpRequest {
         return jsonObject;
     }
 
-    @Test
-    public void apiTest() {
-        String params = "app_key=12345678&params={\"dateType\": 1, \"dim\": \"corp_code\",  \"startDate\": 20170401, \"endDate\": 20170501, \"pageNo\": 1, \"pageSize\": 10, \"fitter\": [{\"dim\": \"corp_code\",\"value\": [\"A10001\",\"ZS8888\"]}]}&sign=8b0a071669ea54b4a058684fb9d1f0f4&ts = 2017-05-04 13:25:00";
-        System.out.println(params);
-        String url = "http://10.23.241.138:8889/v2/target/showing";
-        String method = "POST";
-        JSONObject jsonObject = httpRequest(url, method, params);
-        System.out.println(jsonObject.getJSONObject("data").getJSONObject("mapping"));
-        for (Map.Entry<String,Object> entry:jsonObject.getJSONObject("data").getJSONObject("mapping").entrySet()) {
-            System.out.println(entry.getKey() + "===" + entry.getValue());
+
+    public static void main(String[] args) {
+        ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
+        ScriptEngine nashorn = scriptEngineManager.getEngineByName("nashorn");
+        try {
+            nashorn.eval("function sum(a,b){return a+b;}");
+            System.out.println(nashorn.eval("sum(1,2);"));
+            Invocable invocable = (Invocable) nashorn;
+            System.out.println(invocable.invokeFunction("sum", 1, 3));
+        } catch (ScriptException e) {
+            System.out.println(e.getMessage());
+        } catch (NoSuchMethodException e) {
+            System.out.println(e.getMessage());
         }
 
+        String name = "Mahesh";
 
-       /* String[] strings = new String[3];
-        strings[0] = "123";
-        strings[1] = "456";
-        strings[2] = "789";
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("defaultIndex", strings);
-        System.out.println(jsonObject);*/
+        Integer result = null;
+        try {
+            nashorn.eval("print('" + name + "')");
+            result = (Integer) nashorn.eval("10 + 2");
+        } catch (ScriptException e) {
+            System.out.println("Error executing script: " + e.getMessage());
+        }
+        System.out.println(result.toString());
+    }
+
+
+    @Test
+    public void redisTest() {
+        //连接本地的 Redis 服务
+        Jedis jedis = new Jedis("localhost");
+        System.out.println("连接成功");
+        //查看服务是否运行
+        System.out.println("服务正在运行: " + jedis.ping());
+        System.out.println(jedis.get("kou"));
+
+    }
+
+    @Test
+    public void apiTest() {
+//        String p = "params={\"dateType\":\"1\",\"columnOrder\":[{\"code\":\"date\",\"sort\":\"asc\"}],\"endDate\":20170710,\"pageNo\":1,\"pageSize\":7,\"dim\":\"date\",\"startDate\":20170704}\n";
+//        String params = "app_key=12345678&" + p + "&sign=8b0a071669ea54b4a058684fb9d1f0f4&ts = 2017-05-04 13:25:00";
+//        String url = "http://i.data.api.lianjia.com/v2/target/merlin/completed/all";
+
+        String params = "params=xinzengfangyuanliang,erkanzhanbi,keyuan30rineiyoudaikanlu:,xinzengkeyuanshu,yidaierkanlu:,qiriyaochilu:,daikanliang,keyuan3rineishoukanlu:,sanrishoukanlu:,keyuan15rineierkanlu:,qirishikanlu:";
+        //String params = "params=";
+        String url = "http://10.30.128.245:8480/indexApi/v1/getIndexDetail";
+        String method = "POST";
+        JSONObject jsonObject = httpRequest(url, method, params);
+        System.out.println(jsonObject);
+        JSONObject data = jsonObject.getJSONObject("data");
+        System.out.println(data);
+
+//        String total = ((JSONObject) jsonObject.get("data")).getString("totalCount");
+//        System.out.println(total);
+
+
+//        for (Map.Entry<String,Object> entry:jsonObject.getJSONObject("data").getJSONObject("mapping").entrySet()) {
+//            System.out.println(entry.getKey() + "===" + entry.getValue());
+//        }
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String createtime = simpleDateFormat.format(new Date());
+//        System.out.println(createtime);
     }
 }
