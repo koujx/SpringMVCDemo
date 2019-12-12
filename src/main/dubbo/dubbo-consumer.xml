@@ -12,10 +12,4 @@
     <dubbo:consumer timeout="6000" />
     <dubbo:registry protocol="zookeeper" address="${zookeeper.address}"/>
 
-    <!-- Ehr User相关服务 start -->
-    <dubbo:reference id="ehrUserFacade" interface="com.lianjia.uc.api.user.EhrUserFacade" check="false"/>
-    <dubbo:reference id="ehrOgrFacade" interface="com.lianjia.uc.api.org.EhrOrgFacade" check="false"/>
-    <dubbo:reference id="ucAuthFacade" interface="com.lianjia.uc.api.auth.UcAuthFacade" check="false"/>
-    <dubbo:reference id="housedelFacade" interface="com.lianjia.house.api.HousedelFacade" version="1.0.1" />
-
 </beans>

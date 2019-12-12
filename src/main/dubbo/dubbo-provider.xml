@@ -19,8 +19,4 @@
 	<!-- 用dubbo协议在20880端口暴露服务 -->
 	<dubbo:protocol name="dubbo" port="${dubbo.port}" />
 
-	<!-- imageCaptureFacade provider -->
-	<dubbo:service interface="com.lianjia.merlin.api.service.RptRealKpiMmFacade"
-				   ref="rptRealKpiMmFacade"/>
-
 </beans>

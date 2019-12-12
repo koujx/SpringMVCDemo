@@ -125,7 +125,6 @@ public class httpRequest {
     public void apiTest() {
 //        String p = "params={\"dateType\":\"1\",\"columnOrder\":[{\"code\":\"date\",\"sort\":\"asc\"}],\"endDate\":20170710,\"pageNo\":1,\"pageSize\":7,\"dim\":\"date\",\"startDate\":20170704}\n";
 //        String params = "app_key=12345678&" + p + "&sign=8b0a071669ea54b4a058684fb9d1f0f4&ts = 2017-05-04 13:25:00";
-//        String url = "http://i.data.api.lianjia.com/v2/target/merlin/completed/all";
 
         String params = "params=xinzengfangyuanliang,erkanzhanbi,keyuan30rineiyoudaikanlu:,xinzengkeyuanshu,yidaierkanlu:,qiriyaochilu:,daikanliang,keyuan3rineishoukanlu:,sanrishoukanlu:,keyuan15rineierkanlu:,qirishikanlu:";
         //String params = "params=";

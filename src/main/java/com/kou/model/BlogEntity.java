@@ -15,6 +15,7 @@ public class BlogEntity {
     private Date pubDate;
     private UserEntity userByUserId;
 
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {
